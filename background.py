@@ -5,7 +5,7 @@ import random
 
 def draw_background(land):
     # load our tiles from the assets folder
-    floor = pygame.image.load("../Assets/Sprites/floor.png").convert()
+    floor = pygame.image.load("../assets/sprites/floor.png").convert()
     floor_bottom = pygame.image.load("../assets/sprites/floor_bottom.png").convert()
     sky = pygame.image.load("../assets/sprites/background_sky.png").convert()
     clouds_1 = pygame.image.load("../assets/sprites/background_clouds_1.png").convert()
