@@ -5,13 +5,19 @@ from game_parameters import *
 class Player1(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image_idle = pygame.image.load("../assets/sprites/player_idle.png").convert()
+        self.image_idle = pygame.image.load("../assets/sprites/player_2_idle.png").convert()
         self.image_idle.set_colorkey((0, 0, 0))
         self.image_forward = pygame.image.load("../assets/sprites/player_2_walk.png").convert()
         self.image_forward.set_colorkey((0, 0, 0))
         self.image_reverse = pygame.transform.flip(self.image_forward, True, False)
         self.image_reverse.set_colorkey((0, 0, 0))
-        self.image = self.image_forward
+        self.image_hurt_idle = pygame.image.load("../assets/sprites/player_2_zombie_idle.png").convert()
+        self.image_hurt_idle.set_colorkey((0, 0, 0))
+        self.image_hurt_forward = pygame.image.load("../assets/sprites/player_2_zombie_walk.png").convert()
+        self.image_hurt_forward.set_colorkey((0, 0, 0))
+        self.image_hurt_reverse = pygame.transform.flip(self.image_forward, True, False)
+        self.image_hurt_reverse.set_colorkey((0, 0, 0))
+        self.image = self.image_idle
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
@@ -36,9 +42,9 @@ class Player1(pygame.sprite.Sprite):
     def stop(self):
         self.x_speed = 0
         self.y_speed = 0
+        self.image = self.image_idle
 
     def update(self):
-        # TODO: need to check if player fish left the screen
         self.x += self.x_speed
         self.y -= self.y_speed
         self.rect.x = self.x
@@ -54,5 +60,5 @@ class Player1(pygame.sprite.Sprite):
         if self.y <= 0:
             self.y_speed = 0
 
-    def draw(self, surf):
-        surf.blit(self.image, self.rect)
+    def draw(self, land):
+        land.blit(self.image, self.rect)
