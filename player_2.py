@@ -2,7 +2,7 @@
 import pygame
 from game_parameters import *
 
-class Player1(pygame.sprite.Sprite):
+class Player2(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
         self.image_idle = pygame.image.load("../assets/sprites/player_2_idle.png").convert()
