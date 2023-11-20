@@ -13,7 +13,8 @@ def draw_background(land):
     trees_1 = pygame.image.load("assets/sprites/background_trees_1.png").convert()
     trees_2 = pygame.image.load("assets/sprites/background_trees_2.png").convert()
 
-
+    # scale images
+    sky = pygame.transform.scale(TILE_SIZE, TILE_SIZE)
 
     # make PNGs transparent
     floor.set_colorkey((0, 0, 0))
