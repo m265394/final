@@ -25,4 +25,4 @@ draw_background(background)
 
 
 pygame.quit()
-sys.quit()
+sys.exit()
