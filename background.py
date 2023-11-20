@@ -14,6 +14,7 @@ def draw_background(land):
     trees_2 = pygame.image.load("assets/sprites/background_trees_2.png").convert()
 
 
+
     # make PNGs transparent
     floor.set_colorkey((0, 0, 0))
     floor_bottom.set_colorkey((0, 0, 0))
@@ -24,11 +25,11 @@ def draw_background(land):
     trees_2.set_colorkey((0, 0, 0))
 
     # draw the sky
-    for x in range(0, SCREEN_WIDTH, TILE_SIZE):
-        for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
+    for x in range(0, SCREEN_WIDTH, SKY_TILE):
+        for y in range(0, SCREEN_HEIGHT, SKY_TILE):
             land.blit(sky, (x, y))
-            land.blit(clouds_1, (x, 2*TILE_SIZE))
-            land.blit(clouds_2, (x + TILE_SIZE, 2*TILE_SIZE))
+            land.blit(clouds_1, (x, 2*SKY_TILE))
+            land.blit(clouds_2, (x + SKY_TILE, 2*SKY_TILE))
 
     # draw the floor
     for x in range(0, SCREEN_WIDTH, TILE_SIZE):

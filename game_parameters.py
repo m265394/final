@@ -1,8 +1,9 @@
 
 # Screen Dimensions (in pixels)
-SCREEN_WIDTH = 1680
-SCREEN_HEIGHT = 1050
+SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 600
 TILE_SIZE = 64
+SKY_TILE = 24
 
 # speed in pixels per frame
 MIN_SPEED = 0.5
