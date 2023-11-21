@@ -32,8 +32,9 @@ score_font = pygame.font.Font("assets/fonts/pink_and_blue.otf", 36)
 # load a sound
 
 # load alternate fish and game over
-life_icon = pygame.image.load("assets/sprites/player_1_heart.png").convert()
-life_icon.set_colorkey( (0, 0, 0) )
+player_1_life_icon = pygame.image.load("assets/sprites/player_1_heart.png").convert()
+new_player_1_life_icon = pygame.transform.scale(player_1_life_icon, (TILE_SIZE, TILE_SIZE) )
+new_player_1_life_icon.set_colorkey( (0, 0, 0) )
 
 # set number of lives
 lives = NUM_LIVES
@@ -54,7 +55,7 @@ while lives > 0 and running:
 
     # draw lives
     for i in range(lives):
-        screen.blit(life_icon, (i * TILE_SIZE, SCREEN_HEIGHT - TILE_SIZE))
+        screen.blit(new_player_1_life_icon, (i*TILE_SIZE, SCREEN_HEIGHT - TILE_SIZE))
 
     # update the display
     pygame.display.flip()
