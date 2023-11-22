@@ -5,15 +5,15 @@ from game_parameters import *
 class Player2(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image_idle = pygame.image.load("../assets/sprites/player_2_idle.png").convert()
+        self.image_idle = pygame.image.load("assets/sprites/player_2_idle.png").convert()
         self.image_idle.set_colorkey((0, 0, 0))
-        self.image_forward = pygame.image.load("../assets/sprites/player_2_walk.png").convert()
+        self.image_forward = pygame.image.load("assets/sprites/player_2_walk.png").convert()
         self.image_forward.set_colorkey((0, 0, 0))
         self.image_reverse = pygame.transform.flip(self.image_forward, True, False)
         self.image_reverse.set_colorkey((0, 0, 0))
-        self.image_hurt_idle = pygame.image.load("../assets/sprites/player_2_zombie_idle.png").convert()
+        self.image_hurt_idle = pygame.image.load("assets/sprites/player_2_zombie_idle.png").convert()
         self.image_hurt_idle.set_colorkey((0, 0, 0))
-        self.image_hurt_forward = pygame.image.load("../assets/sprites/player_2_zombie_walk.png").convert()
+        self.image_hurt_forward = pygame.image.load("assets/sprites/player_2_zombie_walk.png").convert()
         self.image_hurt_forward.set_colorkey((0, 0, 0))
         self.image_hurt_reverse = pygame.transform.flip(self.image_forward, True, False)
         self.image_hurt_reverse.set_colorkey((0, 0, 0))
@@ -30,6 +30,7 @@ class Player2(pygame.sprite.Sprite):
 
     def move_down(self):
         self.y_speed = -1 * PLAYER_SPEED
+        self.image = self.image_idle
 
     def move_left(self):
         self.x_speed = -1 * PLAYER_SPEED

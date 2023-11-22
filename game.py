@@ -6,6 +6,8 @@ import time
 # import all necessary files
 from background import draw_background
 from game_parameters import *
+from player_1 import Player1
+from player_2 import Player2
 
 
 #initialize pygame
@@ -19,10 +21,15 @@ pygame.display.set_caption("Under Fire")
 clock = pygame.time.Clock()
 
 
+
 # Main Loop
 running = True
 background = screen.copy()
 draw_background(background)
+
+# create players
+player_1 = Player1(SCREEN_WIDTH/2, SCREEN_HEIGHT/2) # initializing player 1 on the left
+player_2 = Player2(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - 3*TILE_SIZE) # initializing player 2 on the right
 
 
 # load new font to keep score
@@ -31,28 +38,33 @@ score_font = pygame.font.Font("assets/fonts/pink_and_blue.otf", 36)
 
 # load a sound
 
-# load alternate fish and game over
+# load alternate hearts
 player_1_life_icon = pygame.image.load("assets/sprites/player_1_heart.png").convert()
 new_player_1_life_icon = pygame.transform.scale(player_1_life_icon, (TILE_SIZE, TILE_SIZE) )
 new_player_1_life_icon.set_colorkey( (0, 0, 0) )
 
-# set number of lives
-lives = NUM_LIVES
+player_2_life_icon = pygame.image.load("assets/sprites/player_2_heart.png").convert()
+new_player_2_life_icon = pygame.transform.scale(player_2_life_icon, (TILE_SIZE, TILE_SIZE) )
+new_player_2_life_icon.set_colorkey( (0, 0, 0) )
 
-while lives > 0 and running:
+# set number of lives
+lives_1 = NUM_LIVES
+lives_2 = NUM_LIVES
+
+while (lives_1 > 0 and running) or (lives_2 > 0 and running):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False # pygame.quit here would shut down the game
 
         # control player 1
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_w:
                 player_1.move_up()
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_s:
                 player_1.move_down()
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_a:
                 player_1.move_left()
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_d:
                 player_1.move_right()
 
         if event.type == pygame.KEYUP:
@@ -62,28 +74,26 @@ while lives > 0 and running:
         # control player 1
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                player_1.move_up()
+                player_2.move_up()
             if event.key == pygame.K_DOWN:
-                    player_1.move_down()
-                if event.key == pygame.K_LEFT:
-                    player_1.move_left()
-                if event.key == pygame.K_RIGHT:
-                    player_1.move_right()
+                player_2.move_down()
+            if event.key == pygame.K_LEFT:
+                player_2.move_left()
+            if event.key == pygame.K_RIGHT:
+                player_2.move_right()
 
-            if event.type == pygame.KEYUP:
-                player_1.stop()
+        if event.type == pygame.KEYUP:
+            player_2.stop()
 
     # draw the background
     screen.blit(background, (0, 0))
 
-    # update fish posititon
-    fishes.update()
+    # draw objects
+    #objects.update()
 
-    # draw enemy fish
-    enemies.update()
-
-    # update player fish
-    player.update()
+    # update players
+    player_1.update()
+    player_2.update()
 
 
 
@@ -91,9 +101,13 @@ while lives > 0 and running:
     text = score_font.render(f"{score}", True, (0, 29, 255))
     screen.blit(text, (SCREEN_WIDTH - text.get_width() - 15, 0) )
 
+
     # draw lives
-    for i in range(lives):
+    for i in range(lives_1):
         screen.blit(new_player_1_life_icon, (i*TILE_SIZE, SCREEN_HEIGHT - TILE_SIZE))
+
+    for j in range(lives_2):
+        screen.blit(new_player_2_life_icon, ( (SCREEN_WIDTH-TILE_SIZE) - j * TILE_SIZE, SCREEN_HEIGHT - TILE_SIZE))
 
     # update the display
     pygame.display.flip()

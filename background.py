@@ -51,5 +51,5 @@ def draw_background(land):
     # draw the tanks
     for x in range(0, SCREEN_WIDTH, TILE_SIZE):
         for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
-            land.blit(new_tank_right, (TILE_SIZE, SCREEN_HEIGHT - (y + 2*TILE_SIZE) ))
-            land.blit(new_tank_left, (SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (y + 2*TILE_SIZE)) )
+            land.blit(new_tank_right, (0, SCREEN_HEIGHT - (3* y + 3*TILE_SIZE) )) # 3 in front of 'y' indicates how many tanks on screen >3 = more tanks
+            land.blit(new_tank_left, (SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3*y + 3*TILE_SIZE)) )
