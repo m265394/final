@@ -101,6 +101,7 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
     text = score_font.render(f"{score}", True, (0, 29, 255))
     screen.blit(text, (SCREEN_WIDTH - text.get_width() - 15, 0) )
 
+    screen.blit(player_1.image_idle, (SCREEN_WIDTH/2, 0))
 
     # draw lives
     for i in range(lives_1):
