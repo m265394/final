@@ -27,6 +27,11 @@ class Player1(pygame.sprite.Sprite):
         self.y_speed = 0
 
     def move_up(self):
+        #jump = True
+        #jumper = 10
+
+
+
         self.y_speed = PLAYER_SPEED
 
     def move_down(self):

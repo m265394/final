@@ -12,11 +12,13 @@ def draw_background(land):
     clouds_2 = pygame.image.load("assets/sprites/background_clouds_2.png").convert()
     trees_1 = pygame.image.load("assets/sprites/background_trees_1.png").convert()
     trees_2 = pygame.image.load("assets/sprites/background_trees_2.png").convert()
+    tank_right= pygame.image.load("assets/sprites/tank_small.png").convert()
 
     # scale images
     new_sky = pygame.transform.scale(sky, (TILE_SIZE, TILE_SIZE) )
     new_clouds_1 = pygame.transform.scale(clouds_1, (TILE_SIZE, TILE_SIZE) )
     new_clouds_2 = pygame.transform.scale(clouds_2, (TILE_SIZE, TILE_SIZE) )
+    new_tank_right = pygame.transform.scale(tank_right, (TILE_SIZE, TILE_SIZE) )
 
     # make PNGs transparent
     floor.set_colorkey((0, 0, 0))
@@ -26,6 +28,11 @@ def draw_background(land):
     new_clouds_2.set_colorkey((0, 0, 0))
     trees_1.set_colorkey((0, 0, 0))
     trees_2.set_colorkey((0, 0, 0))
+    new_tank_right.set_colorkey((0, 0, 0))
+
+    #flipped tanks
+    new_tank_left = pygame.transform.flip(new_tank_right, True, False)
+    new_tank_left.set_colorkey((0, 0, 0))
 
     # draw the sky
     for x in range(0, SCREEN_WIDTH, TILE_SIZE):
@@ -38,3 +45,11 @@ def draw_background(land):
     for x in range(0, SCREEN_WIDTH, TILE_SIZE):
         land.blit(floor, (x, SCREEN_HEIGHT - 2*TILE_SIZE))
         land.blit(floor_bottom, (x, SCREEN_HEIGHT - TILE_SIZE))
+
+
+
+    # draw the tanks
+    for x in range(0, SCREEN_WIDTH, TILE_SIZE):
+        for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
+            land.blit(new_tank_right, (TILE_SIZE, SCREEN_HEIGHT - (y + 2*TILE_SIZE) ))
+            land.blit(new_tank_left, (SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (y + 2*TILE_SIZE)) )
