@@ -44,9 +44,47 @@ while lives > 0 and running:
         if event.type == pygame.QUIT:
             running = False # pygame.quit here would shut down the game
 
+        # control player 1
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                player_1.move_up()
+            if event.key == pygame.K_DOWN:
+                player_1.move_down()
+            if event.key == pygame.K_LEFT:
+                player_1.move_left()
+            if event.key == pygame.K_RIGHT:
+                player_1.move_right()
+
+        if event.type == pygame.KEYUP:
+            player_1.stop()
+
+
+        # control player 1
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                player_1.move_up()
+            if event.key == pygame.K_DOWN:
+                    player_1.move_down()
+                if event.key == pygame.K_LEFT:
+                    player_1.move_left()
+                if event.key == pygame.K_RIGHT:
+                    player_1.move_right()
+
+            if event.type == pygame.KEYUP:
+                player_1.stop()
 
     # draw the background
     screen.blit(background, (0, 0))
+
+    # update fish posititon
+    fishes.update()
+
+    # draw enemy fish
+    enemies.update()
+
+    # update player fish
+    player.update()
+
 
 
     # update score on screen
