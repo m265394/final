@@ -28,9 +28,9 @@ class Player2(pygame.sprite.Sprite):
     def move_up(self):
         self.y_speed = PLAYER_SPEED
 
-    def move_down(self):
-        self.y_speed = -1 * PLAYER_SPEED
-        self.image = self.image_idle
+    #def move_down(self):
+        #self.y_speed = -1 * PLAYER_SPEED
+        #self.image = self.image_idle
 
     def move_left(self):
         self.x_speed = -1 * PLAYER_SPEED

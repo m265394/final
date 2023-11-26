@@ -28,13 +28,13 @@ background = screen.copy()
 draw_background(background)
 
 # create players
-player_1 = Player1(SCREEN_WIDTH/2, SCREEN_HEIGHT/2) # initializing player 1 on the left
-player_2 = Player2(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - 3*TILE_SIZE) # initializing player 2 on the right
+player_1 = Player1(2*TILE_SIZE, SCREEN_HEIGHT - 3*TILE_SIZE) # initializing player 1 on the left
+player_2 = Player2(SCREEN_WIDTH - 2*TILE_SIZE, SCREEN_HEIGHT - 3*TILE_SIZE) # initializing player 2 on the right
 
 
 # load new font to keep score
 score = 0
-score_font = pygame.font.Font("assets/fonts/pink_and_blue.otf", 36)
+score_font = pygame.font.Font("assets/fonts/Hexagonal.ttf", 36)
 
 # load a sound
 
@@ -51,6 +51,9 @@ new_player_2_life_icon.set_colorkey( (0, 0, 0) )
 lives_1 = NUM_LIVES
 lives_2 = NUM_LIVES
 
+jumping = False
+jump_count = 10
+
 while (lives_1 > 0 and running) or (lives_2 > 0 and running):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -58,32 +61,60 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
 
         # control player 1
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w:
-                player_1.move_up()
-            if event.key == pygame.K_s:
-                player_1.move_down()
+            if not jumping:
+                if event.key == pygame.K_w:
+                    jumping = True
+            else:
+                if jump_count >= -10:
+                    bound = 1
+                    if jump_count < 0:
+                        bound = -1
+                    player_1 = (jump_count ** 2) * (1/2) * bound
+                    jump_count -= 1
+
+                else:
+                    jumping = False
+                    jump_count = 10
+
+            #if event.key == pygame.K_s:
+                #player_1.move_down()
+
             if event.key == pygame.K_a:
                 player_1.move_left()
             if event.key == pygame.K_d:
                 player_1.move_right()
 
-        if event.type == pygame.KEYUP:
-            player_1.stop()
+            if event.type == pygame.KEYUP:
+                player_1.stop()
 
 
-        # control player 1
+        # control player 2
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                player_2.move_up()
-            if event.key == pygame.K_DOWN:
-                player_2.move_down()
+            if not jumping:
+                if event.key == pygame.K_UP:
+                    jumping = True
+            else:
+                if jump_count >= -10:
+                    bound = 1
+                    if jump_count < 0:
+                        bound = -1
+                    player_2 = (jump_count ** 2) * (1 / 2) * bound
+                    jump_count -= 1
+
+                else:
+                    jumping = False
+                    jump_count = 10
+
+            # if event.key == pygame.K_DOWN:
+            # player_2.move_down()
+
             if event.key == pygame.K_LEFT:
                 player_2.move_left()
             if event.key == pygame.K_RIGHT:
                 player_2.move_right()
 
-        if event.type == pygame.KEYUP:
-            player_2.stop()
+            if event.type == pygame.KEYUP:
+                player_2.stop()
 
     # draw the background
     screen.blit(background, (0, 0))
@@ -98,10 +129,13 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
 
 
     # update score on screen
-    text = score_font.render(f"{score}", True, (0, 29, 255))
-    screen.blit(text, (SCREEN_WIDTH - text.get_width() - 15, 0) )
+    text_1 = score_font.render(f"{score}", True, (255, 146, 0))
+    screen.blit(text_1, (text_1.get_width() - 15, 0) )
 
-    screen.blit(player_1.image_idle, (SCREEN_WIDTH/2, 0))
+    text_2 = score_font.render(f"{score}", True, (255, 0, 0))
+    screen.blit(text_2, (SCREEN_WIDTH - text_2.get_width() - 15, 0) )
+
+    #screen.blit(player_1.image_idle, (SCREEN_WIDTH/2, 0))
 
     # draw lives
     for i in range(lives_1):
