@@ -54,7 +54,8 @@ lives_2 = NUM_LIVES
 jumping_1 = False
 jump_count_1 = 10
 jumping_2 = False
-jump_count_2 = 10
+velocity_2 = 5
+mass_2 = 1
 
 
 while (lives_1 > 0 and running) or (lives_2 > 0 and running):
@@ -64,24 +65,8 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
 
         # control player 1
         if event.type == pygame.KEYDOWN:
-            if not jumping_1:
-                if event.key == pygame.K_w:
-                    jumping_1 = True
-                    player_1.move_up()
-            else:
-                if jump_count_1 >= -10:
-                    bound = 1
-                    if jump_count_1 < 0:
-                        bound = -1
-                    player_1 = (jump_count_1 ** 2) * (1 / 2) * bound
-                    jump_count_1 -= 1
-
-                else:
-                    jumping_1 = False
-                    jump_count_1 = 10
-
-            #if event.key == pygame.K_s:
-                #player_1.move_down()
+            if event.key == pygame.K_w:
+                player_1.move_up()
 
             if event.key == pygame.K_a:
                 player_1.move_left()
@@ -94,24 +79,9 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
 
         # control player 2
         if event.type == pygame.KEYDOWN:
-            if not jumping_2:
-                if event.key == pygame.K_UP:
-                    jumping_2 = True
-                    player_2.move_up()
-            else:
-                if jump_count_2 >= -10:
-                    bound = 1
-                    if jump_count_2 < 0:
-                        bound = -1
-                    player_2 = (jump_count_2 ** 2) * (1 / 2) * bound
-                    jump_count_2 -= 1
+            if event.key == pygame.K_UP:
+                player_2.jump()
 
-                else:
-                    jumping_2 = False
-                    jump_count_2 = 10
-
-            # if event.key == pygame.K_DOWN:
-            # player_2.move_down()
 
             if event.key == pygame.K_LEFT:
                 player_2.move_left()
@@ -120,6 +90,8 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
 
         if event.type == pygame.KEYUP:
             player_2.stop()
+            player_2.grounded()
+            player_2.fall()
 
     # draw the background
     screen.blit(background, (0, 0))

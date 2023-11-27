@@ -30,14 +30,32 @@ class Player2(pygame.sprite.Sprite):
         self.rect.center = (x, y)
         self.x_speed = 0
         self.y_speed = 0
+        self.jumping = False
+        self.velocity = 5
+        self.mass = 1
 
 
-    def move_up(self):
-        self.y_speed = PLAYER_SPEED
+    def grounded(self):
+        if not self.jumping:
+           self.jumping = True
 
-    #def move_down(self):
-        #self.y_speed = -1 * PLAYER_SPEED
-        #self.image = self.image_idle
+    def jump(self):
+        if self.jumping:
+            force = (1 / 2) * self.mass * (self.velocity ** 2)
+            self.y -= force
+            self.velocity -= 1
+
+            if self.velocity < 0:
+                self.mass = -1
+
+            if self.velocity == -6:
+                self.jumping = False
+                self.velocity = 5
+                self.mass = 1
+
+    def fall(self):
+        if not self.jumping and self.y != (SCREEN_HEIGHT - 3*TILE_SIZE):
+            self.y = min(self.y + 2, (SCREEN_HEIGHT - 3*TILE_SIZE) )
 
     def move_left(self):
         self.x_speed = -1 * PLAYER_SPEED
