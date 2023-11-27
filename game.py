@@ -51,8 +51,11 @@ new_player_2_life_icon.set_colorkey( (0, 0, 0) )
 lives_1 = NUM_LIVES
 lives_2 = NUM_LIVES
 
-jumping = False
-jump_count = 10
+jumping_1 = False
+jump_count_1 = 10
+jumping_2 = False
+jump_count_2 = 10
+
 
 while (lives_1 > 0 and running) or (lives_2 > 0 and running):
     for event in pygame.event.get():
@@ -61,20 +64,21 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
 
         # control player 1
         if event.type == pygame.KEYDOWN:
-            if not jumping:
+            if not jumping_1:
                 if event.key == pygame.K_w:
-                    jumping = True
+                    jumping_1 = True
+                    player_1.move_up()
             else:
-                if jump_count >= -10:
+                if jump_count_1 >= -10:
                     bound = 1
-                    if jump_count < 0:
+                    if jump_count_1 < 0:
                         bound = -1
-                    player_1 = (jump_count ** 2) * (1/2) * bound
-                    jump_count -= 1
+                    player_1 = (jump_count_1 ** 2) * (1 / 2) * bound
+                    jump_count_1 -= 1
 
                 else:
-                    jumping = False
-                    jump_count = 10
+                    jumping_1 = False
+                    jump_count_1 = 10
 
             #if event.key == pygame.K_s:
                 #player_1.move_down()
@@ -84,26 +88,27 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
             if event.key == pygame.K_d:
                 player_1.move_right()
 
-            if event.type == pygame.KEYUP:
-                player_1.stop()
+        if event.type == pygame.KEYUP:
+            player_1.stop()
 
 
         # control player 2
         if event.type == pygame.KEYDOWN:
-            if not jumping:
+            if not jumping_2:
                 if event.key == pygame.K_UP:
-                    jumping = True
+                    jumping_2 = True
+                    player_2.move_up()
             else:
-                if jump_count >= -10:
+                if jump_count_2 >= -10:
                     bound = 1
-                    if jump_count < 0:
+                    if jump_count_2 < 0:
                         bound = -1
-                    player_2 = (jump_count ** 2) * (1 / 2) * bound
-                    jump_count -= 1
+                    player_2 = (jump_count_2 ** 2) * (1 / 2) * bound
+                    jump_count_2 -= 1
 
                 else:
-                    jumping = False
-                    jump_count = 10
+                    jumping_2 = False
+                    jump_count_2 = 10
 
             # if event.key == pygame.K_DOWN:
             # player_2.move_down()
@@ -113,8 +118,8 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
             if event.key == pygame.K_RIGHT:
                 player_2.move_right()
 
-            if event.type == pygame.KEYUP:
-                player_2.stop()
+        if event.type == pygame.KEYUP:
+            player_2.stop()
 
     # draw the background
     screen.blit(background, (0, 0))
@@ -136,6 +141,9 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
     screen.blit(text_2, (SCREEN_WIDTH - text_2.get_width() - 15, 0) )
 
     #screen.blit(player_1.image_idle, (SCREEN_WIDTH/2, 0))
+    screen.blit(background, (0, 0))
+    player_1.draw(screen)
+    player_2.draw(screen)
 
     # draw lives
     for i in range(lives_1):
