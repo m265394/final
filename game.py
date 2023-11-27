@@ -66,7 +66,8 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
         # control player 1
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
-                player_1.move_up()
+                player_1.jumping = True
+
 
             if event.key == pygame.K_a:
                 player_1.move_left()
@@ -80,9 +81,7 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
         # control player 2
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                player_2.jump()
-
-
+                player_2.jumping = True
             if event.key == pygame.K_LEFT:
                 player_2.move_left()
             if event.key == pygame.K_RIGHT:
@@ -90,8 +89,7 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
 
         if event.type == pygame.KEYUP:
             player_2.stop()
-            player_2.grounded()
-            player_2.fall()
+
 
     # draw the background
     screen.blit(background, (0, 0))
@@ -100,6 +98,8 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
     #objects.update()
 
     # update players
+    player_1.jump()
+    player_2.jump()
     player_1.update()
     player_2.update()
 

@@ -31,31 +31,28 @@ class Player2(pygame.sprite.Sprite):
         self.x_speed = 0
         self.y_speed = 0
         self.jumping = False
-        self.velocity = 5
-        self.mass = 1
+        self.jump_height = 12
 
 
-    def grounded(self):
-        if not self.jumping:
-           self.jumping = True
+    # def grounded(self):
+    #     if not self.jumping:
+    #        self.jumping = True
 
     def jump(self):
         if self.jumping:
-            force = (1 / 2) * self.mass * (self.velocity ** 2)
-            self.y -= force
-            self.velocity -= 1
-
-            if self.velocity < 0:
-                self.mass = -1
-
-            if self.velocity == -6:
+            if self.jump_height >= -12:
+                direction = 1
+                if self.jump_height < 2:
+                    direction = -1
+                self.y -= self.jump_height**2 * 0.1 * direction
+                self.jump_height -= 1
+            else:
                 self.jumping = False
-                self.velocity = 5
-                self.mass = 1
+                self.jump_height = 12
 
-    def fall(self):
-        if not self.jumping and self.y != (SCREEN_HEIGHT - 3*TILE_SIZE):
-            self.y = min(self.y + 2, (SCREEN_HEIGHT - 3*TILE_SIZE) )
+    # def fall(self):
+    #     if not self.jumping and self.y != (SCREEN_HEIGHT - 3*TILE_SIZE):
+    #         self.y = min(self.y + 2, (SCREEN_HEIGHT - 3*TILE_SIZE) )
 
     def move_left(self):
         self.x_speed = -1 * PLAYER_SPEED

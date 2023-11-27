@@ -32,34 +32,20 @@ class Player1(pygame.sprite.Sprite):
         self.rect.center = (x, y)
         self.x_speed = 0
         self.y_speed = 0
+        self.jumping = False
+        self.jump_height = 12
 
-    def move_up(self):
-        self.y_speed = PLAYER_SPEED
-        #time.sleep(1)
-        #self.y_speed = -1 * PLAYER_SPEED
-
-        # if not jumping:
-
-        # else:
-        # if jump_count_1 >= -10:
-        # bound = 1
-        # if jump_count_1 < 0:
-        # bound = -1
-        # player_1 = (jump_count_1 ** 2) * (1 / 2) * bound
-        # jump_count_1 -= 1
-
-        # else:
-        # jumping_1 = False
-        # jump_count_1 = 10
-
-        # if event.key == pygame.K_s:
-        # player_1.move_down()
-
-
-    def move_down(self):
-        self.y_speed = -1 * PLAYER_SPEED
-        self.image = self.image_idle
-
+    def jump(self):
+        if self.jumping:
+            if self.jump_height >= -12:
+                direction = 1
+                if self.jump_height < 0:
+                    direction = -1
+                self.y -= self.jump_height**2 * 0.1 * direction
+                self.jump_height -= 1
+            else:
+                self.jumping = False
+                self.jump_height = 12
     def move_left(self):
         self.x_speed = -1 * PLAYER_SPEED
         self.image = self.image_reverse
