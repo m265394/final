@@ -4,7 +4,7 @@ import random
 import time
 
 # import all necessary files
-from background import draw_background
+from background import draw_background, add_fruit, add_star, add_heart, add_bomb
 from game_parameters import *
 from player_1 import Player1
 from player_2 import Player2
@@ -26,6 +26,19 @@ clock = pygame.time.Clock()
 running = True
 background = screen.copy()
 draw_background(background)
+
+
+# draw fruits
+add_fruit(10)
+
+# draw stars
+add_star(6)
+
+# draw hearts
+add_heart(4)
+
+# draw bombs
+add_bomb(3)
 
 # create players
 player_1 = Player1(2*TILE_SIZE, SCREEN_HEIGHT - 3*TILE_SIZE) # initializing player 1 on the left

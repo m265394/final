@@ -2,6 +2,10 @@
 import pygame
 from game_parameters import *
 import random
+from fruit import Fruit, fruits
+from star import Star, stars
+from heart import Heart, hearts
+from bomb import Bomb, bombs
 
 def draw_background(land):
     # load our tiles from the assets folder
@@ -53,3 +57,24 @@ def draw_background(land):
         for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
             land.blit(new_tank_right, (0, SCREEN_HEIGHT - (3* y + 3*TILE_SIZE) )) # 3 in front of 'y' indicates how many tanks on screen >3 = more tanks
             land.blit(new_tank_left, (SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3*y + 3*TILE_SIZE)) )
+
+def add_fruit(num_fruit):
+    for _ in range(num_fruit):
+        fruits.add(Fruit((random.randint(SCREEN_WIDTH, SCREEN_WIDTH + TILE_SIZE)),
+                        random.randint(TILE_SIZE, SCREEN_HEIGHT - 3 * TILE_SIZE)))
+
+def add_star(num_star):
+    for _ in range(num_star):
+        stars.add(Star((random.randint(SCREEN_WIDTH, SCREEN_WIDTH + TILE_SIZE)),
+                        random.randint(TILE_SIZE, SCREEN_HEIGHT - 3 * TILE_SIZE)))
+
+
+def add_heart(num_heart):
+    for _ in range(num_heart):
+        hearts.add(Heart((random.randint(SCREEN_WIDTH, SCREEN_WIDTH + TILE_SIZE)),
+                        random.randint(TILE_SIZE, SCREEN_HEIGHT - 3 * TILE_SIZE)))
+
+def add_bomb(num_bomb):
+    for _ in range(num_bomb):
+        bombs.add(Bomb((random.randint(SCREEN_WIDTH, SCREEN_WIDTH + TILE_SIZE)),
+                        random.randint(TILE_SIZE, SCREEN_HEIGHT - 3 * TILE_SIZE)))
