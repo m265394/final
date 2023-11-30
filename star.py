@@ -26,4 +26,5 @@ class Star(pygame.sprite.Sprite):
     def draw(self, land):
         land.blit(self.image, self.rect)
 
-stars = pygame.sprite.Group()
+stars_left = pygame.sprite.Group()
+stars_right = pygame.sprite.Group()

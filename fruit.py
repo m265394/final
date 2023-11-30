@@ -20,10 +20,11 @@ class Fruit(pygame.sprite.Sprite):
         self.rect.center = (x,y)
 
     def update(self):
-        self.x -= self.speed
+        self.x += self.speed
         self.rect.x = self.x
 
     def draw(self, land):
         land.blit(self.image, self.rect)
 
-fruits = pygame.sprite.Group()
+fruits_left = pygame.sprite.Group()
+fruits_right = pygame.sprite.Group()

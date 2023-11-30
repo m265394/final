@@ -9,10 +9,11 @@ MAX_SPEED = 3.0
 class Bomb(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image_left = pygame.image.load("assets/sprites/object_bomb_small.png").convert()
-        self.image = pygame.transform.scale(self.image, (SKY_TILE, SKY_TILE))
-        self.image.set_colorkey((0, 0, 0))
-        self.image = pygame.transform.flip(self.image, True, False)
+        self.image_reverse = pygame.image.load("assets/sprites/object_bomb_small.png").convert()
+        self.image_reverse = pygame.transform.scale(self.image_reverse, (SKY_TILE, SKY_TILE))
+        self.image_reverse.set_colorkey((0, 0, 0))
+        self.image_forward = pygame.transform.flip(self.image_reverse, True, False)
+        self.image = self.image_reverse
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
@@ -26,4 +27,5 @@ class Bomb(pygame.sprite.Sprite):
     def draw(self, land):
         land.blit(self.image, self.rect)
 
-bombs = pygame.sprite.Group()
+bombs_left = pygame.sprite.Group()
+bombs_right = pygame.sprite.Group()

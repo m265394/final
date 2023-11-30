@@ -26,4 +26,5 @@ class Heart(pygame.sprite.Sprite):
     def draw(self, land):
         land.blit(self.image, self.rect)
 
-hearts = pygame.sprite.Group()
+hearts_left = pygame.sprite.Group()
+hearts_right = pygame.sprite.Group()
