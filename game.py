@@ -52,12 +52,14 @@ add_bomb(1)
 # load new font to keep score
 score_1 = 0
 score_2 = 0
-score_font = pygame.font.Font("assets/fonts/Hexagonal.ttf", 36)
+score_font_1 = pygame.font.Font("assets/fonts/Hexagonal.ttf", 36)
+score_font_2 = pygame.font.Font("assets/fonts/sunshine.ttf", 36)
+game_over_font = pygame.font.Font("assets/fonts/RedUndeadExpanded.ttf", 42)
 
-# load background music
+# load sounds
 #music = pygame.mixer.Sound("assets/sounds/chomp.wav")
 
-# load jump sound effect
+fatality = pygame.mixer.Sound("assets/sounds/fatality.mp3")
 
 # load alternate hearts
 player_1_life_icon = pygame.image.load("assets/sprites/player_1_heart.png").convert()
@@ -173,10 +175,10 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
         add_bomb(len(result_2))
 
     # update score on screen
-    text_1 = score_font.render(f"{score_1}", True, (255, 146, 0))
-    screen.blit(text_1, (text_1.get_width() - 15, 0) )
+    text = score_font_1.render(f"SCORE: {score_1}", True, (255, 146, 0))
+    screen.blit(text, (SCREEN_WIDTH - text.get_width() - 15, 0))
 
-    text_2 = score_font.render(f"{score_2}", True, (255, 0, 0))
+    text_2 = score_font_2.render(f"{score_2}", True, (255, 0, 0))
     screen.blit(text_2, (SCREEN_WIDTH - text_2.get_width() - 15, 0) )
 
     #screen.blit(player_1.image_idle, (SCREEN_WIDTH/2, 0))
@@ -206,19 +208,33 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
     # set the frame rate to 60 FPS
     clock.tick(60)
 
+
 # create new game over background
-screen.blit(background, (0,0))
+#screen.blit(background, (0,0))
+screen.fill((70,150,230))
+
+# show game over message
+message = game_over_font.render("GAME OVER", True, (0, 0, 0) )
+screen.blit(message, (SCREEN_WIDTH/2 - message.get_width()/2, SCREEN_HEIGHT/2 - 4*message.get_height()/2) )
+
+#show final score
+score_text_1 = score_font_1.render(f"SCORE: {score_1}", True, (255, 146, 0) )
+screen.blit(score_text_1, (SCREEN_WIDTH/2 - 4*score_text_1.get_width()/2, SCREEN_HEIGHT/2 + score_text_1.get_height()/2))
+
+score_text_2 = score_font_2.render(f"SCORE: {score_2}", True, (255, 0, 0) )
+screen.blit(score_text_2, (SCREEN_WIDTH/2 + 2*score_text_2.get_width()/2, SCREEN_HEIGHT/2 + score_text_2.get_height()/2))
 
 # update display
 pygame.display.flip()
 
 # play game over sound
+time.sleep(1)
+pygame.mixer.Sound.play(fatality)
 
 # wait for user to exit the game
 ## This is where you would put a 'play again' function
 while True:
     for event in pygame.event.get():
-        #quit pygame
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
