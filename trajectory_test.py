@@ -5,7 +5,7 @@ pygame.init()
 
 # Constants
 WIDTH, HEIGHT = 800, 600
-FPS = 15
+FPS = 60
 
 # Colors
 WHITE = (255, 255, 255)
@@ -16,8 +16,8 @@ clock = pygame.time.Clock()
 
 # Starting position and initial velocity
 pos = [50, HEIGHT - 500]
-velocity = [20, -3]  # x velocity, y velocity
-acceleration = [0, 2]  # x acceleration, y acceleration
+velocity = [5, -1]  # x velocity, y velocity
+acceleration = [0, .5]  # x acceleration, y acceleration
 
 running = True
 while running:

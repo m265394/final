@@ -58,6 +58,12 @@ game_over_font = pygame.font.Font("assets/fonts/RedUndeadExpanded.ttf", 42)
 
 # load sounds
 #music = pygame.mixer.Sound("assets/sounds/chomp.wav")
+jump_1 = pygame.mixer.Sound("assets/sounds/jump_small.wav")
+jump_2 = pygame.mixer.Sound("assets/sounds/jump_super.wav")
+fruit_contact = pygame.mixer.Sound("assets/sounds/coin.wav")
+star_contact = pygame.mixer.Sound("assets/sounds/powerup_appears.wav")
+heart_contact = pygame.mixer.Sound("assets/sounds/1-up.wav")
+bomb_contact = pygame.mixer.Sound("assets/sounds/mario_hurt.wav")
 
 fatality = pygame.mixer.Sound("assets/sounds/fatality.mp3")
 
@@ -136,41 +142,41 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
     # check for collisions between player_1 and items
     points_1 = pygame.sprite.spritecollide(player_1, fruits_left or fruits_right, True)
     if points_1:
-        #pygame.mixer.Sound.play(chomp)
+        pygame.mixer.Sound.play(fruit_contact)
         score_1 += len(points_1)
         add_fruit(len(points_1))
 
 
     super_1 = pygame.sprite.spritecollide(player_1, stars_left or stars_right, True)
     if super_1:
-        #pygame.mixer.Sound.play(chomp)
+        pygame.mixer.Sound.play(star_contact)
         score_1 = score_1 + 5*len(super_1)
         add_star(len(super_1)/10)
 
     # check if player collides with bombs
     result_1 = pygame.sprite.spritecollide(player_1, bombs_left or bombs_right, True)
     if result_1:
-        #pygame.mixer.Sound.play(bubbles)
+        pygame.mixer.Sound.play(bomb_contact)
         lives_1 -= len(result_1)
         add_bomb(len(result_1))
 
     # check for collisions between player_2 and items
     points_2 = pygame.sprite.spritecollide(player_2, fruits_left or fruits_right, True)
     if points_2:
-        # pygame.mixer.Sound.play(chomp)
+        pygame.mixer.Sound.play(fruit_contact)
         score_2 += len(points_2)
         add_fruit(len(points_2))
 
     super_2 = pygame.sprite.spritecollide(player_2, stars_left or stars_right, True)
     if super_2:
-        # pygame.mixer.Sound.play(chomp)
+        pygame.mixer.Sound.play(star_contact)
         score_2 = score_2 + 5 * len(super_2)
         add_star(len(super_2) / 10)
 
     # check if player collides with bombs
     result_2 = pygame.sprite.spritecollide(player_2, bombs_left or bombs_right, True)
     if result_2:
-        # pygame.mixer.Sound.play(bubbles)
+        pygame.mixer.Sound.play(bomb_contact)
         lives_1 -= len(result_2)
         add_bomb(len(result_2))
 

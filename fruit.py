@@ -18,10 +18,18 @@ class Fruit(pygame.sprite.Sprite):
         self.y = y
         self.speed = random.uniform(MIN_SPEED, MAX_SPEED)
         self.rect.center = (x,y)
+        self.position = [x, y]
+        self.velocity_left = [5, -1] # x velocity, y velocity
+        self.velocity_right = [-5, -1] # x velocity, y velocity
+        self.acceleration = [0, .5]  # x acceleration, y acceleration
 
     def update(self):
-        self.x += self.speed
-        self.rect.x = self.x
+        #self.x += self.speed
+        #self.rect.x = self.x
+        self.position[0] += self.velocity_left[0]
+        self.position[1] += self.velocity_left[1]
+        self.velocity_left[0] += self.acceleration[0]
+        self.velocity_left[1] += self.acceleration[1]
 
     def draw(self, land):
         land.blit(self.image, self.rect)
