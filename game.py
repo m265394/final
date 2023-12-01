@@ -174,15 +174,18 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
         lives_1 -= len(result_2)
         add_bomb(len(result_2))
 
+    # draw background
+    screen.blit(background, (0, 0))
+
     # update score on screen
     text = score_font_1.render(f"SCORE: {score_1}", True, (255, 146, 0))
-    screen.blit(text, (SCREEN_WIDTH - text.get_width() - 15, 0))
+    screen.blit(text, (0, 0))
 
-    text_2 = score_font_2.render(f"{score_2}", True, (255, 0, 0))
+    text_2 = score_font_2.render(f"SCORE: {score_2}", True, (255, 0, 0))
     screen.blit(text_2, (SCREEN_WIDTH - text_2.get_width() - 15, 0) )
 
     #screen.blit(player_1.image_idle, (SCREEN_WIDTH/2, 0))
-    screen.blit(background, (0, 0))
+
     player_1.draw(screen)
     player_2.draw(screen)
     fruits_left.draw(screen)

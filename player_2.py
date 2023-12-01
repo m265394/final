@@ -31,7 +31,7 @@ class Player2(pygame.sprite.Sprite):
         self.x_speed = 0
         self.y_speed = 0
         self.jumping = False
-        self.jump_height = 12
+        self.jump_height = 15
 
 
     # def grounded(self):
@@ -40,15 +40,15 @@ class Player2(pygame.sprite.Sprite):
 
     def jump(self):
         if self.jumping:
-            if self.jump_height >= -12:
+            if self.jump_height >= -15:
                 direction = 1
-                if self.jump_height < 2:
+                if self.jump_height < 0:
                     direction = -1
                 self.y -= self.jump_height**2 * 0.1 * direction
                 self.jump_height -= 1
             else:
                 self.jumping = False
-                self.jump_height = 12
+                self.jump_height = 15
 
     # def fall(self):
     #     if not self.jumping and self.y != (SCREEN_HEIGHT - 3*TILE_SIZE):

@@ -1,7 +1,7 @@
 
 # Screen Dimensions (in pixels)
 SCREEN_WIDTH = 1200
-SCREEN_HEIGHT = 600
+SCREEN_HEIGHT = 650
 TILE_SIZE = 64
 SKY_TILE = 24
 

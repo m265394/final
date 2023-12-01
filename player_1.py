@@ -33,11 +33,11 @@ class Player1(pygame.sprite.Sprite):
         self.x_speed = 0
         self.y_speed = 0
         self.jumping = False
-        self.jump_height = 12
+        self.jump_height = 15
 
     def jump(self):
         if self.jumping:
-            if self.jump_height >= -12:
+            if self.jump_height >= -15:
                 direction = 1
                 if self.jump_height < 0:
                     direction = -1
@@ -45,7 +45,7 @@ class Player1(pygame.sprite.Sprite):
                 self.jump_height -= 1
             else:
                 self.jumping = False
-                self.jump_height = 12
+                self.jump_height = 15
     def move_left(self):
         self.x_speed = -1 * PLAYER_SPEED
         self.image = self.image_reverse
