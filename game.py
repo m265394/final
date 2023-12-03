@@ -38,6 +38,8 @@ player_2 = Player2(SCREEN_WIDTH/2, SCREEN_HEIGHT - 3*TILE_SIZE) # initializing p
 
 # draw fruits
 add_fruit(2)
+# fruits_left.add(Fruit(TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE)))
+# fruits_right.add(Fruit(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE)))
 
 # draw stars
 add_star(1)
@@ -144,14 +146,14 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
     if points_1:
         pygame.mixer.Sound.play(fruit_contact)
         score_1 += len(points_1)
-        add_fruit(len(points_1))
+        add_fruit(len(points_1)//4)
 
 
     super_1 = pygame.sprite.spritecollide(player_1, stars_left or stars_right, True)
     if super_1:
         pygame.mixer.Sound.play(star_contact)
         score_1 = score_1 + 5*len(super_1)
-        add_star(len(super_1)/10)
+        add_star(len(super_1)//10)
 
     # check if player collides with bombs
     result_1 = pygame.sprite.spritecollide(player_1, bombs_left or bombs_right, True)

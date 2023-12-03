@@ -62,8 +62,8 @@ def draw_background(land):
 def add_fruit(num_fruit):
     for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
         for _ in range(num_fruit):
-            fruits_left.add(Fruit(TILE_SIZE, SCREEN_HEIGHT - (3* y + 3*TILE_SIZE) ))
-            fruits_right.add(Fruit(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3*y + 3*TILE_SIZE)) )
+            fruits_left.add(Fruit(TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'right'))
+            fruits_right.add(Fruit(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'left'))
 
 def add_star(num_star):
     for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
