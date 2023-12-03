@@ -12,24 +12,18 @@ class Fruit(pygame.sprite.Sprite):
         self.image = pygame.image.load("assets/sprites/object_blue.png").convert()
         self.image = pygame.transform.scale(self.image, (SKY_TILE, SKY_TILE))
         self.image.set_colorkey((0, 0, 0))
-        self.image = pygame.transform.flip(self.image, True, False)
         self.rect = self.image.get_rect()
-        self.x = x
-        self.y = y
-        self.speed = random.uniform(MIN_SPEED, MAX_SPEED)
-        self.rect.center = (x,y)
+        self.rect.center = (x, y)
         self.position = [x, y]
-        self.velocity_left = [5, -1] # x velocity, y velocity
-        self.velocity_right = [-5, -1] # x velocity, y velocity
-        self.acceleration = [0, .5]  # x acceleration, y acceleration
+        self.velocity_left = [5, -.5]  # x velocity, y velocity
+        self.acceleration = [0, .2]  # x acceleration, y acceleration
 
     def update(self):
-        #self.x += self.speed
-        #self.rect.x = self.x
-        self.position[0] += self.velocity_left[0]
-        self.position[1] += self.velocity_left[1]
-        self.velocity_left[0] += self.acceleration[0]
-        self.velocity_left[1] += self.acceleration[1]
+        self.position[0] += self.velocity_left[0]  # adjust the x position based on the x velocity
+        self.position[1] += self.velocity_left[1]  # adjust the y position based on the y velocity
+        self.velocity_left[0] += self.acceleration[0]  # update the x velocity based on x acceleration
+        self.velocity_left[1] += self.acceleration[1]  # update the y velocity based on y acceleration
+        self.rect.topleft = self.position  # update the rect based on the new position
 
     def draw(self, land):
         land.blit(self.image, self.rect)

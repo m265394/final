@@ -58,8 +58,8 @@ game_over_font = pygame.font.Font("assets/fonts/RedUndeadExpanded.ttf", 42)
 
 # load sounds
 #music = pygame.mixer.Sound("assets/sounds/chomp.wav")
-jump_1 = pygame.mixer.Sound("assets/sounds/jump_small.wav")
-jump_2 = pygame.mixer.Sound("assets/sounds/jump_super.wav")
+jump_1 = pygame.mixer.Sound("assets/sounds/jump-small.wav")
+jump_2 = pygame.mixer.Sound("assets/sounds/jump-super.wav")
 fruit_contact = pygame.mixer.Sound("assets/sounds/coin.wav")
 star_contact = pygame.mixer.Sound("assets/sounds/powerup_appears.wav")
 heart_contact = pygame.mixer.Sound("assets/sounds/1-up.wav")
