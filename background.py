@@ -65,6 +65,22 @@ def add_fruit(num_fruit):
             fruits_left.add(Fruit(TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'right'))
             fruits_right.add(Fruit(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'left'))
 
+def add_fruit_left(num_fruit):
+    # remove current list
+    fruits_left.empty()
+
+    #add fruits from tanks
+    for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
+        for _ in range(num_fruit):
+            fruits_left.add(Fruit(TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'right'))
+
+
+def add_fruit_right(num_fruit):
+    fruits_right.empty()
+    for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
+        for _ in range(num_fruit):
+            fruits_right.add(Fruit(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'left'))
+
 def add_star(num_star):
     for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
         for _ in range(num_star):

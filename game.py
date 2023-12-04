@@ -4,7 +4,7 @@ import random
 import time
 
 # import all necessary files
-from background import draw_background, add_fruit, add_star, add_heart, add_bomb
+from background import *
 from game_parameters import *
 from player_1 import Player1
 from player_2 import Player2
@@ -37,9 +37,8 @@ player_1 = Player1(SCREEN_WIDTH/2 - TILE_SIZE, SCREEN_HEIGHT - 3*TILE_SIZE) # in
 player_2 = Player2(SCREEN_WIDTH/2, SCREEN_HEIGHT - 3*TILE_SIZE) # initializing player 2 on the right
 
 # draw fruits
-add_fruit(2)
-# fruits_left.add(Fruit(TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE)))
-# fruits_right.add(Fruit(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE)))
+add_fruit_left(1)
+add_fruit_right(1)
 
 # draw stars
 add_star(1)
@@ -142,11 +141,17 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
     player_2.update()
 
     # check for collisions between player_1 and items
-    points_1 = pygame.sprite.spritecollide(player_1, fruits_left or fruits_right, True)
+    points_1 = pygame.sprite.spritecollide(player_1, fruits_left, True)
     if points_1:
         pygame.mixer.Sound.play(fruit_contact)
         score_1 += len(points_1)
-        add_fruit(len(points_1)//4)
+        add_fruit_left(len(points_1))
+
+    points_1 = pygame.sprite.spritecollide(player_1, fruits_right, True)
+    if points_1:
+        pygame.mixer.Sound.play(fruit_contact)
+        score_1 += len(points_1)
+        add_fruit_right(len(points_1))
 
 
     super_1 = pygame.sprite.spritecollide(player_1, stars_left or stars_right, True)
@@ -162,12 +167,20 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
         lives_1 -= len(result_1)
         add_bomb(len(result_1))
 
+
+
     # check for collisions between player_2 and items
-    points_2 = pygame.sprite.spritecollide(player_2, fruits_left or fruits_right, True)
+    points_2 = pygame.sprite.spritecollide(player_2, fruits_left, True)
     if points_2:
         pygame.mixer.Sound.play(fruit_contact)
         score_2 += len(points_2)
-        add_fruit(len(points_2))
+        add_fruit_left(len(points_2))
+
+    points_2 = pygame.sprite.spritecollide(player_2, fruits_right, True)
+    if points_2:
+        pygame.mixer.Sound.play(fruit_contact)
+        score_2 += len(points_2)
+        add_fruit_right(len(points_2))
 
     super_2 = pygame.sprite.spritecollide(player_2, stars_left or stars_right, True)
     if super_2:
@@ -194,10 +207,23 @@ while (lives_1 > 0 and running) or (lives_2 > 0 and running):
 
     #screen.blit(player_1.image_idle, (SCREEN_WIDTH/2, 0))
 
+
     player_1.draw(screen)
     player_2.draw(screen)
+
+    # check if fruits have left the screen
+    for fruit in fruits_left:  # loop through fish in sprite group fishes
+        if fruit.rect.x < (0 - TILE_SIZE):  # can also do -fish.rect.width
+            fruits_left.remove(fruit)
+            add_fruit_left(1)
     fruits_left.draw(screen)
+
+    for fruit in fruits_left:  # loop through fish in sprite group fishes
+        if fruit.rect.x < (0 - TILE_SIZE):  # can also do -fish.rect.width
+            fruits_left.remove(fruit)
+            add_fruit_right(1)
     fruits_right.draw(screen)
+
     stars_left.draw(screen)
     stars_right.draw(screen)
     hearts_left.draw(screen)
