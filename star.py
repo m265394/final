@@ -7,21 +7,28 @@ MIN_SPEED = 0.5
 MAX_SPEED = 3.0
 
 class Star(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y, direction):
         super().__init__()
         self.image = pygame.image.load("assets/sprites/object_star.png").convert()
         self.image = pygame.transform.scale(self.image, (SKY_TILE, SKY_TILE))
         self.image.set_colorkey((0, 0, 0))
-        self.image = pygame.transform.flip(self.image, True, False)
         self.rect = self.image.get_rect()
-        self.x = x
-        self.y = y
-        self.speed = random.uniform(MIN_SPEED, MAX_SPEED)
-        self.rect.center = (x,y)
+        self.rect.center = (x, y)
+        self.position = [x, y]
+        self.acceleration = [0, .2]  # x acceleration, y acceleration
+        self.step = .8  # movement across frames
+
+        # adjust velocity based on direction
+        if direction == 'right':
+            self.velocity = [random.randint(1, 4), -.5]  # x velocity, y velocity towards right
+        elif direction == 'left':
+            self.velocity = [-(random.randint(1, 4)), -.5]  # x velocity, y velocity towards left
 
     def update(self):
-        self.x -= self.speed
-        self.rect.x = self.x
+        self.position[0] += self.velocity[0] * self.step  # adjust the x position based on the x velocity
+        self.position[1] += self.velocity[1] * self.step  # adjust the y position based on the y velocity
+        self.velocity[1] += self.acceleration[1]  # update the y velocity based on y acceleration
+        self.rect.topleft = self.position  # update the rect based on the new position
 
     def draw(self, land):
         land.blit(self.image, self.rect)

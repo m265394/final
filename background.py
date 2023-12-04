@@ -1,7 +1,6 @@
 
 import pygame
 from game_parameters import *
-import random
 from fruit import Fruit, fruits_left, fruits_right
 from star import Star, stars_left, stars_right
 from heart import Heart, hearts_left, hearts_right
@@ -59,16 +58,9 @@ def draw_background(land):
             land.blit(new_tank_left, (SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3*y + 3*TILE_SIZE)) )
 
 
-def add_fruit(num_fruit):
-    for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
-        for _ in range(num_fruit):
-            fruits_left.add(Fruit(TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'right'))
-            fruits_right.add(Fruit(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'left'))
-
 def add_fruit_left(num_fruit):
     # remove current list
     fruits_left.empty()
-
     #add fruits from tanks
     for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
         for _ in range(num_fruit):
@@ -81,21 +73,42 @@ def add_fruit_right(num_fruit):
         for _ in range(num_fruit):
             fruits_right.add(Fruit(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'left'))
 
-def add_star(num_star):
+def add_star_left(num_star):
+    stars_left.empty()
     for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
         for _ in range(num_star):
-            stars_left.add(Star(TILE_SIZE, SCREEN_HEIGHT - (3* y + 3*TILE_SIZE) ))
-            stars_right.add(Star(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3*y + 3*TILE_SIZE)) )
+            stars_left.add(Star(TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'right'))
 
 
-def add_heart(num_heart):
-    for y in range(TILE_SIZE, SCREEN_HEIGHT, TILE_SIZE):
+def add_star_right(num_star):
+    stars_right.empty()
+    for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
+        for _ in range(num_star):
+            stars_right.add(Star(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'left'))
+
+
+def add_heart_left(num_heart):
+    hearts_left.empty()
+    for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
         for _ in range(num_heart):
-            hearts_left.add(Heart(TILE_SIZE, SCREEN_HEIGHT - (3* y + 3*TILE_SIZE) ))
-            hearts_right.add(Heart(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3*y + 3*TILE_SIZE)) )
+            hearts_left.add(Heart(TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'right'))
 
-def add_bomb(num_bomb):
-    for y in range(TILE_SIZE, SCREEN_HEIGHT, TILE_SIZE):
+
+def add_heart_right(num_heart):
+    hearts_right.empty()
+    for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
+        for _ in range(num_heart):
+            hearts_right.add(Heart(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'left'))
+
+def add_bomb_left(num_bomb):
+    bombs_left.empty()
+    for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
         for _ in range(num_bomb):
-            bombs_left.add(Bomb(TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE)))
-            bombs_right.add(Bomb(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE)))
+            bombs_left.add(Bomb(TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'right'))
+
+
+def add_bomb_right(num_bomb):
+    bombs_right.empty()
+    for y in range(0, SCREEN_HEIGHT, TILE_SIZE):
+        for _ in range(num_bomb):
+            bombs_right.add(Bomb(SCREEN_WIDTH - TILE_SIZE, SCREEN_HEIGHT - (3 * y + 3 * TILE_SIZE), direction = 'left'))
