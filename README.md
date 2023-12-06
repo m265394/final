@@ -15,9 +15,9 @@ Player 1:
 - D: Move Right
 
 Player 2:
-- ^: Jump
-- <: Move left
-- > : Move Right
+- ↑: Jump
+- ←: Move left
+- →: Move Right
 
 
 **Sources:**
