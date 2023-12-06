@@ -17,7 +17,7 @@ Player 1:
 Player 2:
 - ^: Jump
 - <: Move left
-- >>: Move Right
+-  : Move Right
 
 
 **Sources:**
