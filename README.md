@@ -11,12 +11,12 @@ EW200 Final Project
 **How to Play:**
 Player 1:
 - W: Jump
-- A: Move left
+- A: Move Left
 - D: Move Right
 
 Player 2:
 - ↑: Jump
-- ←: Move left
+- ←: Move Left
 - →: Move Right
 
 
